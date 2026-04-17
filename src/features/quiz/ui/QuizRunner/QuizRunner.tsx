@@ -17,7 +17,6 @@ import {
   quizQuestionsAtom,
   quizSelectedChoiceAtom,
 } from '../../model/atoms';
-
 import { QuizQuestionView } from '../QuizQuestion/QuizQuestion';
 import { QuizResultView } from '../QuizResult/QuizResult';
 

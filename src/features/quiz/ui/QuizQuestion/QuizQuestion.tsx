@@ -1,7 +1,5 @@
 'use client';
 
-import type { QuizQuestion } from '../../model/types';
-
 import {
   ChoiceButton,
   ChoiceIcon,
@@ -15,6 +13,8 @@ import {
   SubPrompt,
   Wrap,
 } from './QuizQuestion.style';
+
+import type { QuizQuestion } from '../../model/types';
 
 interface Props {
   question: QuizQuestion;
