@@ -1,7 +1,5 @@
 import styled from '@emotion/styled';
 
-import type { AppTheme } from '@/shared/ui/theme';
-
 export const Main = styled.main`
   padding: ${({ theme }) => theme.spacing(5)} 0 ${({ theme }) => theme.spacing(10)};
 `;

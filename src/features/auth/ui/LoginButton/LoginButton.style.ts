@@ -1,5 +1,6 @@
-import styled from '@emotion/styled';
 import Image from 'next/image';
+
+import styled from '@emotion/styled';
 
 export const Placeholder = styled.div`
   width: 60px;

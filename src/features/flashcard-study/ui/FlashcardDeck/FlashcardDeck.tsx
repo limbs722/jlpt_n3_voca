@@ -11,7 +11,6 @@ import { Button } from '@/shared/ui/Button';
 import { Stack } from '@/shared/ui/Container';
 
 import { flashcardDeckSizeAtom, flashcardFlippedAtom, flashcardIndexAtom } from '../../model/atoms';
-
 import { Flashcard } from '../Flashcard/Flashcard';
 
 import { Controls, DoneDesc, DoneTitle, DoneWrap, Info, Progress } from './FlashcardDeck.style';
