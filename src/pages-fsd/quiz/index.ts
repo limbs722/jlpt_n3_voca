@@ -1,1 +1,1 @@
-export { QuizPage } from './ui/QuizPage';
+export { QuizPage } from './ui';

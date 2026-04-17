@@ -1,2 +1,1 @@
-export { SearchBar } from './ui/SearchBar';
-export { CategoryFilter } from './ui/CategoryFilter';
+export { SearchBar, CategoryFilter } from './ui';
