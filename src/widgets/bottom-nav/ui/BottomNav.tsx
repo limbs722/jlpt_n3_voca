@@ -1,21 +1,22 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import { ROUTES } from "@/shared/config/constants";
+import styled from '@emotion/styled';
+
+import { ROUTES } from '@/shared/config/constants';
 
 const ITEMS: { href: string; label: string; icon: string; match: RegExp }[] = [
-  { href: ROUTES.HOME, label: "홈", icon: "🏠", match: /^\/$/ },
-  { href: ROUTES.STUDY, label: "학습", icon: "📖", match: /^\/study/ },
-  { href: ROUTES.QUIZ, label: "퀴즈", icon: "📝", match: /^\/quiz/ },
-  { href: ROUTES.FAVORITES, label: "즐겨찾기", icon: "★", match: /^\/favorites/ },
-  { href: ROUTES.WORDS, label: "단어", icon: "📚", match: /^\/words/ },
+  { href: ROUTES.HOME, label: '홈', icon: '🏠', match: /^\/$/ },
+  { href: ROUTES.STUDY, label: '학습', icon: '📖', match: /^\/study/ },
+  { href: ROUTES.QUIZ, label: '퀴즈', icon: '📝', match: /^\/quiz/ },
+  { href: ROUTES.FAVORITES, label: '즐겨찾기', icon: '★', match: /^\/favorites/ },
+  { href: ROUTES.WORDS, label: '단어', icon: '📚', match: /^\/words/ },
 ];
 
 export const BottomNav = () => {
-  const pathname = usePathname() ?? "/";
+  const pathname = usePathname() ?? '/';
   return (
     <Nav>
       {ITEMS.map((item) => {
@@ -32,7 +33,7 @@ export const BottomNav = () => {
 };
 
 const Nav = styled.nav`
-  position: sticky;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
@@ -45,15 +46,16 @@ const Nav = styled.nav`
   padding: 4px 0 max(4px, env(safe-area-inset-bottom));
 `;
 
-const NavLink = styled(Link)<{ $active: boolean }>`
+const NavLink = styled(Link, {
+  shouldForwardProp: (prop) => prop !== '$active',
+})<{ $active: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2px;
   padding: 6px 0;
-  color: ${({ theme, $active }) =>
-    $active ? theme.colors.primary : theme.colors.textSubtle};
+  color: ${({ theme, $active }) => ($active ? theme.colors.primary : theme.colors.textSubtle)};
   transition: color 0.1s ease;
 `;
 

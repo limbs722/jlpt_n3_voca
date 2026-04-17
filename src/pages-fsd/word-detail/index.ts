@@ -1,1 +1,1 @@
-export { WordDetailPage } from "./ui/WordDetailPage";
+export { WordDetailPage } from './ui/WordDetailPage';

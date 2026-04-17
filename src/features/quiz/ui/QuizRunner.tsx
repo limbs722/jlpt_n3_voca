@@ -1,25 +1,27 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
-import { useAtom } from "jotai";
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import { useWordsQuery } from "@/entities/word";
-import { useRecordAnswer } from "@/entities/user-progress";
-import { Button } from "@/shared/ui/Button";
-import { Stack } from "@/shared/ui/Container";
+import styled from '@emotion/styled';
+import { useAtom } from 'jotai';
 
+import { useRecordAnswer } from '@/entities/user-progress';
+import { useWordsQuery } from '@/entities/word';
+import { Button } from '@/shared/ui/Button';
+import { Stack } from '@/shared/ui/Container';
+import { AppTheme } from '@/shared/ui/theme';
+
+import { buildQuizQuestions } from '../lib/build-questions';
 import {
   quizCurrentIndexAtom,
   quizIncorrectIdsAtom,
   quizPhaseAtom,
   quizQuestionsAtom,
   quizSelectedChoiceAtom,
-} from "../model/atoms";
-import { buildQuizQuestions } from "../lib/build-questions";
-import { QuizQuestionView } from "./QuizQuestion";
-import { QuizResultView } from "./QuizResult";
-import { AppTheme } from "@/shared/ui/theme";
+} from '../model/atoms';
+
+import { QuizQuestionView } from './QuizQuestion';
+import { QuizResultView } from './QuizResult';
 
 interface Props {
   questionCount?: number;
@@ -27,11 +29,7 @@ interface Props {
   filterIds?: number[];
 }
 
-export const QuizRunner = ({
-  questionCount = 10,
-  essentialOnly,
-  filterIds,
-}: Props) => {
+export const QuizRunner = ({ questionCount = 10, essentialOnly, filterIds }: Props) => {
   const { data: words = [], isLoading } = useWordsQuery();
   const [phase, setPhase] = useAtom(quizPhaseAtom);
   const [questions, setQuestions] = useAtom(quizQuestionsAtom);
@@ -42,7 +40,7 @@ export const QuizRunner = ({
 
   useEffect(() => {
     // reset when component mounts (new quiz session)
-    setPhase("idle");
+    setPhase('idle');
     setQuestions([]);
     setIndex(0);
     setIncorrect([]);
@@ -62,7 +60,7 @@ export const QuizRunner = ({
     setIndex(0);
     setIncorrect([]);
     setSelected(null);
-    setPhase("running");
+    setPhase('running');
   };
 
   const handleSelect = (choiceId: number) => {
@@ -77,7 +75,7 @@ export const QuizRunner = ({
   const handleNext = () => {
     setSelected(null);
     if (index + 1 >= questions.length) {
-      setPhase("result");
+      setPhase('result');
       return;
     }
     setIndex((i) => i + 1);
@@ -85,13 +83,12 @@ export const QuizRunner = ({
 
   if (isLoading) return <Info>단어를 불러오는 중…</Info>;
 
-  if (phase === "idle") {
+  if (phase === 'idle') {
     return (
       <StartCard>
         <StartTitle>퀴즈 모드</StartTitle>
         <StartDesc>
-          {questionCount}문제의 4지선다 퀴즈를 풀어 볼까요? 일본어 → 한국어,
-          한국어 → 일본어가 섞여 출제됩니다.
+          {questionCount}문제의 4지선다 퀴즈를 풀어 볼까요? 일본어 → 한국어, 한국어 → 일본어가 섞여 출제됩니다.
         </StartDesc>
         <Button size="lg" onClick={startQuiz} fullWidth>
           시작하기
@@ -100,11 +97,11 @@ export const QuizRunner = ({
     );
   }
 
-  if (phase === "result") {
+  if (phase === 'result') {
     return (
       <QuizResultView
         onRestart={() => {
-          setPhase("idle");
+          setPhase('idle');
         }}
       />
     );
@@ -116,19 +113,9 @@ export const QuizRunner = ({
   return (
     <Stack gap={4}>
       <ProgressBar total={questions.length} index={index} />
-      <QuizQuestionView
-        question={current}
-        selectedId={selected}
-        disabled={selected !== null}
-        onSelect={handleSelect}
-      />
-      <Button
-        size="lg"
-        onClick={handleNext}
-        disabled={selected === null}
-        fullWidth
-      >
-        {index + 1 >= questions.length ? "결과 보기" : "다음 문제"}
+      <QuizQuestionView question={current} selectedId={selected} disabled={selected !== null} onSelect={handleSelect} />
+      <Button size="lg" onClick={handleNext} disabled={selected === null} fullWidth>
+        {index + 1 >= questions.length ? '결과 보기' : '다음 문제'}
       </Button>
     </Stack>
   );
@@ -153,7 +140,7 @@ const StartCard = styled.div`
   background: ${({ theme }: { theme: AppTheme }) => theme.colors.bgElevated};
   border: 1px solid ${({ theme }: { theme: AppTheme }) => theme.colors.border};
   border-radius: ${({ theme }: { theme: AppTheme }) => theme.radii.lg};
-  padding: ${({ theme }: { theme: AppTheme }) => theme.spacing(8)}px;
+  padding: 12px;
   text-align: center;
   display: flex;
   flex-direction: column;

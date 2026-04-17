@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const Container = styled.div`
   width: 100%;
@@ -17,7 +17,7 @@ export const Stack = styled.div<{ gap?: number }>`
 
 export const Row = styled.div<{ gap?: number; align?: string; justify?: string }>`
   display: flex;
-  align-items: ${({ align = "center" }) => align};
-  justify-content: ${({ justify = "flex-start" }) => justify};
+  align-items: ${({ align = 'center' }) => align};
+  justify-content: ${({ justify = 'flex-start' }) => justify};
   gap: ${({ theme, gap = 2 }) => theme.spacing(gap)};
 `;

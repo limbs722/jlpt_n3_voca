@@ -1,21 +1,19 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
-import { useAtom } from "jotai";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo } from 'react';
 
-import { useWordsQuery, type Word } from "@/entities/word";
-import { useRecordAnswer } from "@/entities/user-progress";
-import { shuffle } from "@/shared/lib/utils/shuffle";
-import { Button } from "@/shared/ui/Button";
-import { Stack } from "@/shared/ui/Container";
+import styled from '@emotion/styled';
+import { useAtom } from 'jotai';
 
-import {
-  flashcardDeckSizeAtom,
-  flashcardFlippedAtom,
-  flashcardIndexAtom,
-} from "../model/atoms";
-import { Flashcard } from "./Flashcard";
+import { useRecordAnswer } from '@/entities/user-progress';
+import { useWordsQuery, type Word } from '@/entities/word';
+import { shuffle } from '@/shared/lib/utils/shuffle';
+import { Button } from '@/shared/ui/Button';
+import { Stack } from '@/shared/ui/Container';
+
+import { flashcardDeckSizeAtom, flashcardFlippedAtom, flashcardIndexAtom } from '../model/atoms';
+
+import { Flashcard } from './Flashcard';
 
 interface Props {
   /** 즐겨찾기 id 배열을 넘기면 해당 단어만으로 덱 구성 */
@@ -71,9 +69,7 @@ export const FlashcardDeck = ({ filterIds, essentialOnly }: Props) => {
     return (
       <DoneWrap>
         <DoneTitle>오늘의 덱을 모두 풀었어요 🎉</DoneTitle>
-        <DoneDesc>
-          총 {deck.length}개 단어를 학습했습니다. 다시 섞어 한번 더 해볼까요?
-        </DoneDesc>
+        <DoneDesc>총 {deck.length}개 단어를 학습했습니다. 다시 섞어 한번 더 해볼까요?</DoneDesc>
         <Button
           onClick={() => {
             setIndex(0);
@@ -92,18 +88,9 @@ export const FlashcardDeck = ({ filterIds, essentialOnly }: Props) => {
       <Progress>
         {index + 1} / {deck.length}
       </Progress>
-      <Flashcard
-        word={current}
-        flipped={flipped}
-        onFlip={() => setFlipped((f) => !f)}
-      />
+      <Flashcard word={current} flipped={flipped} onFlip={() => setFlipped((f) => !f)} />
       <Controls>
-        <Button
-          variant="secondary"
-          onClick={handleUnknown}
-          size="lg"
-          fullWidth
-        >
+        <Button variant="secondary" onClick={handleUnknown} size="lg" fullWidth>
           모르겠어요
         </Button>
         <Button onClick={handleKnown} size="lg" fullWidth>

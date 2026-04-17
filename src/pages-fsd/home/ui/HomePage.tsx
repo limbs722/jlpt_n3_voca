@@ -1,14 +1,15 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
-import Link from "next/link";
+import Link from 'next/link';
 
-import { Header } from "@/widgets/header";
-import { BottomNav } from "@/widgets/bottom-nav";
-import { StatsDashboard } from "@/widgets/stats-dashboard";
-import { APP_DESCRIPTION, ROUTES } from "@/shared/config/constants";
-import { Container, Stack } from "@/shared/ui/Container";
-import { Card, CardSubtitle, CardTitle } from "@/shared/ui/Card";
+import styled from '@emotion/styled';
+
+import { APP_DESCRIPTION, ROUTES } from '@/shared/config/constants';
+import { Card, CardSubtitle, CardTitle } from '@/shared/ui/Card';
+import { Container, Stack } from '@/shared/ui/Container';
+import { BottomNav } from '@/widgets/bottom-nav';
+import { Header } from '@/widgets/header';
+import { StatsDashboard } from '@/widgets/stats-dashboard';
 
 export const HomePage = () => (
   <>
@@ -17,11 +18,7 @@ export const HomePage = () => (
       <Main>
         <Stack gap={5}>
           <Hero>
-            <HeroTitle>
-              오늘도{" "}
-              <Accent>5분만</Accent>, <br />
-              JLPT N3를 정복해 볼까요?
-            </HeroTitle>
+            <HeroTitle>오늘도 JLPT N3를 정복해 볼까요?</HeroTitle>
             <HeroDesc>{APP_DESCRIPTION}</HeroDesc>
           </Hero>
 
@@ -99,7 +96,9 @@ const Shortcuts = styled.div`
 const ShortcutLink = styled(Link)`
   & > div {
     height: 100%;
-    transition: border-color 0.15s ease, transform 0.1s ease;
+    transition:
+      border-co lor 0.15s ease,
+      transform 0.1s ease;
   }
   &:hover > div {
     border-color: ${({ theme }) => theme.colors.primary};

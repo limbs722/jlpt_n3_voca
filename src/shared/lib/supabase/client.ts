@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import { createBrowserClient } from "@supabase/ssr";
-import type { SupabaseClient } from "@supabase/supabase-js";
+import { createBrowserClient } from '@supabase/ssr';
 
-import { env, isSupabaseConfigured } from "@/shared/config/env";
-import type { Database } from "@/shared/types/database";
+import { env, isSupabaseConfigured } from '@/shared/config/env';
+
+import type { Database } from '@/shared/types/database';
+import type { SupabaseClient } from '@supabase/supabase-js';
 
 /**
  * We cast to `SupabaseClient<Database>` (only the first generic) because
@@ -21,10 +22,7 @@ let cached: TypedSupabaseClient | null = null;
 export const getSupabaseBrowserClient = (): TypedSupabaseClient | null => {
   if (!isSupabaseConfigured) return null;
   if (!cached) {
-    cached = createBrowserClient<Database>(
-      env.SUPABASE_URL,
-      env.SUPABASE_ANON_KEY,
-    ) as unknown as TypedSupabaseClient;
+    cached = createBrowserClient<Database>(env.SUPABASE_URL, env.SUPABASE_ANON_KEY) as unknown as TypedSupabaseClient;
   }
   return cached;
 };

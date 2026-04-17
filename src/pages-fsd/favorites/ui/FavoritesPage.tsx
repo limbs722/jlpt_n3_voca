@@ -1,26 +1,25 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
-import Link from "next/link";
-import { useMemo } from "react";
+import { useMemo } from 'react';
 
-import { useFavorites } from "@/entities/favorite";
-import { useWordsQuery } from "@/entities/word";
-import { ROUTES } from "@/shared/config/constants";
-import { Button } from "@/shared/ui/Button";
-import { Container, Row, Stack } from "@/shared/ui/Container";
-import { WordList } from "@/widgets/word-list";
-import { Header } from "@/widgets/header";
-import { BottomNav } from "@/widgets/bottom-nav";
+import Link from 'next/link';
+
+import styled from '@emotion/styled';
+
+import { useFavorites } from '@/entities/favorite';
+import { useWordsQuery } from '@/entities/word';
+import { ROUTES } from '@/shared/config/constants';
+import { Button } from '@/shared/ui/Button';
+import { Container, Row, Stack } from '@/shared/ui/Container';
+import { BottomNav } from '@/widgets/bottom-nav';
+import { Header } from '@/widgets/header';
+import { WordList } from '@/widgets/word-list';
 
 export const FavoritesPage = () => {
   const { favoriteIds } = useFavorites();
   const { data: words = [] } = useWordsQuery();
 
-  const favoriteWords = useMemo(
-    () => words.filter((w) => favoriteIds.includes(w.id)),
-    [words, favoriteIds],
-  );
+  const favoriteWords = useMemo(() => words.filter((w) => favoriteIds.includes(w.id)), [words, favoriteIds]);
 
   return (
     <>
@@ -35,18 +34,12 @@ export const FavoritesPage = () => {
 
             {favoriteWords.length > 0 && (
               <Row gap={2}>
-                <Link
-                  href={`${ROUTES.STUDY}?favorites=1`}
-                  style={{ flex: 1 }}
-                >
+                <Link href={`${ROUTES.STUDY}?favorites=1`} style={{ flex: 1 }}>
                   <Button fullWidth size="md">
                     플래시카드로 복습
                   </Button>
                 </Link>
-                <Link
-                  href={`${ROUTES.QUIZ}?favorites=1`}
-                  style={{ flex: 1 }}
-                >
+                <Link href={`${ROUTES.QUIZ}?favorites=1`} style={{ flex: 1 }}>
                   <Button fullWidth variant="secondary" size="md">
                     즐겨찾기로 퀴즈
                   </Button>

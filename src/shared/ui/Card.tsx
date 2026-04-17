@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const Card = styled.div`
   background: ${({ theme }) => theme.colors.bgElevated};

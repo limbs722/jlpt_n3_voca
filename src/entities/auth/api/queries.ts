@@ -1,7 +1,8 @@
 'use client';
 
-import { useAtom, useSetAtom } from 'jotai';
 import { useCallback } from 'react';
+
+import { useAtom, useSetAtom } from 'jotai';
 
 import { getSupabaseBrowserClient } from '@/shared/lib/supabase/client';
 
@@ -20,10 +21,7 @@ export const useSignInWithGoogle = () => {
     const supabase = getSupabaseBrowserClient();
     if (!supabase) return;
 
-    const redirectTo =
-      typeof window !== 'undefined'
-        ? `${window.location.origin}/auth/callback`
-        : '/auth/callback';
+    const redirectTo = typeof window !== 'undefined' ? `${window.location.origin}/auth/callback` : '/auth/callback';
 
     await supabase.auth.signInWithOAuth({
       provider: 'google',

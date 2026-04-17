@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import { Badge } from "@/shared/ui/Badge";
-import { POS_LABEL_KO, type Word } from "@/entities/word";
-import { AppTheme } from "@/shared/ui/theme";
+import { POS_LABEL_KO, type Word } from '@/entities/word';
+import { Badge } from '@/shared/ui/Badge';
+import { AppTheme } from '@/shared/ui/theme';
 
 interface Props {
   word: Word;
@@ -24,9 +24,7 @@ export const Flashcard = ({ word, flipped, onFlip }: Props) => (
       <Hint>탭해서 뜻 보기</Hint>
     </FrontFace>
     <BackFace $flipped={flipped}>
-      <TopBadges>
-        {word.is_essential && <Badge tone="primary">필수</Badge>}
-      </TopBadges>
+      <TopBadges>{word.is_essential && <Badge tone="primary">필수</Badge>}</TopBadges>
       <Meaning>{word.meaning_ko}</Meaning>
       {word.examples.length > 0 && (
         <ExampleBlock>
@@ -62,20 +60,24 @@ const faceBase = `
   transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
 `;
 
-const FrontFace = styled.div<{ $flipped: boolean }>`
+const FrontFace = styled('div', {
+  shouldForwardProp: (prop) => prop !== '$flipped',
+})<{ $flipped: boolean }>`
   ${faceBase}
   background: ${({ theme }: { theme: AppTheme }) => theme.colors.bgElevated};
   border: 1px solid ${({ theme }: { theme: AppTheme }) => theme.colors.border};
   box-shadow: ${({ theme }: { theme: AppTheme }) => theme.shadows.md};
-  transform: rotateY(${({ $flipped }) => ($flipped ? "180deg" : "0deg")});
+  transform: rotateY(${({ $flipped }) => ($flipped ? '180deg' : '0deg')});
 `;
 
-const BackFace = styled.div<{ $flipped: boolean }>`
+const BackFace = styled('div', {
+  shouldForwardProp: (prop) => prop !== '$flipped',
+})<{ $flipped: boolean }>`
   ${faceBase}
   background: ${({ theme }: { theme: AppTheme }) => theme.colors.bgElevated};
   border: 1px solid ${({ theme }: { theme: AppTheme }) => theme.colors.border};
   box-shadow: ${({ theme }: { theme: AppTheme }) => theme.shadows.md};
-  transform: rotateY(${({ $flipped }) => ($flipped ? "360deg" : "180deg")});
+  transform: rotateY(${({ $flipped }) => ($flipped ? '360deg' : '180deg')});
 `;
 
 const TopBadges = styled.div`
@@ -110,8 +112,7 @@ const Meaning = styled.div`
 const ExampleBlock = styled.div`
   margin-top: 16px;
   padding-top: 12px;
-  border-top: 1px dashed
-    ${({ theme }: { theme: AppTheme }) => theme.colors.border};
+  border-top: 1px dashed ${({ theme }: { theme: AppTheme }) => theme.colors.border};
   text-align: center;
   display: flex;
   flex-direction: column;

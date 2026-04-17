@@ -1,6 +1,7 @@
 'use client';
 
 import { atom } from 'jotai';
+
 import type { User } from '@supabase/supabase-js';
 
 /** 현재 로그인된 Supabase 유저. null = 비로그인 */

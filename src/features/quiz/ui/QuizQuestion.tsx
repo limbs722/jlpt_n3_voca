@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import type { QuizQuestion } from "../model/types";
-import { AppTheme } from "@/shared/ui/theme";
+import { AppTheme } from '@/shared/ui/theme';
+
+import type { QuizQuestion } from '../model/types';
 
 interface Props {
   question: QuizQuestion;
@@ -12,33 +13,19 @@ interface Props {
   onSelect: (choiceId: number) => void;
 }
 
-export const QuizQuestionView = ({
-  question,
-  selectedId,
-  disabled,
-  onSelect,
-}: Props) => {
+export const QuizQuestionView = ({ question, selectedId, disabled, onSelect }: Props) => {
   const prompt =
-    question.direction === "jp-to-ko"
-      ? (question.word.kanji ?? question.word.reading)
-      : question.word.meaning_ko;
+    question.direction === 'jp-to-ko' ? (question.word.kanji ?? question.word.reading) : question.word.meaning_ko;
 
-  const subPrompt =
-    question.direction === "jp-to-ko" && question.word.kanji
-      ? question.word.reading
-      : null;
+  const subPrompt = question.direction === 'jp-to-ko' && question.word.kanji ? question.word.reading : null;
 
   return (
     <Wrap>
       <Prompt>
         <PromptLabel>
-          {question.direction === "jp-to-ko"
-            ? "다음 단어의 뜻은?"
-            : "다음 뜻에 해당하는 단어는?"}
+          {question.direction === 'jp-to-ko' ? '다음 단어의 뜻은?' : '다음 뜻에 해당하는 단어는?'}
         </PromptLabel>
-        <PromptValue $jp={question.direction === "jp-to-ko"}>
-          {prompt}
-        </PromptValue>
+        <PromptValue $jp={question.direction === 'jp-to-ko'}>{prompt}</PromptValue>
         {subPrompt && <SubPrompt>{subPrompt}</SubPrompt>}
       </Prompt>
       <Choices>
@@ -48,20 +35,20 @@ export const QuizQuestionView = ({
           const showResult = disabled;
           const state: ChoiceState = !showResult
             ? isSelected
-              ? "selected"
-              : "idle"
+              ? 'selected'
+              : 'idle'
             : isCorrect
-              ? "correct"
+              ? 'correct'
               : isSelected
-                ? "wrong"
-                : "idle";
+                ? 'wrong'
+                : 'idle';
           return (
             <ChoiceButton
               key={c.wordId}
               onClick={() => !disabled && onSelect(c.wordId)}
               disabled={disabled}
               $state={state}
-              $jp={question.direction === "ko-to-jp"}
+              $jp={question.direction === 'ko-to-jp'}
               type="button"
             >
               {c.text}
@@ -73,7 +60,7 @@ export const QuizQuestionView = ({
   );
 };
 
-type ChoiceState = "idle" | "selected" | "correct" | "wrong";
+type ChoiceState = 'idle' | 'selected' | 'correct' | 'wrong';
 
 const Wrap = styled.div`
   display: flex;
@@ -98,8 +85,7 @@ const PromptLabel = styled.div`
 `;
 
 const PromptValue = styled.div<{ $jp: boolean }>`
-  font-family: ${({ theme, $jp }: { theme: AppTheme; $jp: boolean }) =>
-    $jp ? theme.fonts.jp : theme.fonts.base};
+  font-family: ${({ theme, $jp }: { theme: AppTheme; $jp: boolean }) => ($jp ? theme.fonts.jp : theme.fonts.base)};
   font-size: clamp(28px, 8vw, 40px);
   font-weight: 700;
   color: ${({ theme }: { theme: AppTheme }) => theme.colors.text};
@@ -124,8 +110,7 @@ const ChoiceButton = styled.button<{ $state: ChoiceState; $jp: boolean }>`
   border-radius: ${({ theme }: { theme: AppTheme }) => theme.radii.md};
   border: 1px solid ${({ theme }: { theme: AppTheme }) => theme.colors.border};
   background: ${({ theme }: { theme: AppTheme }) => theme.colors.bgElevated};
-  font-family: ${({ theme, $jp }: { theme: AppTheme; $jp: boolean }) =>
-    $jp ? theme.fonts.jp : theme.fonts.base};
+  font-family: ${({ theme, $jp }: { theme: AppTheme; $jp: boolean }) => ($jp ? theme.fonts.jp : theme.fonts.base)};
   font-size: 16px;
   text-align: left;
   color: ${({ theme }: { theme: AppTheme }) => theme.colors.text};
@@ -140,19 +125,19 @@ const ChoiceButton = styled.button<{ $state: ChoiceState; $jp: boolean }>`
 
   ${({ $state, theme }) => {
     switch ($state) {
-      case "selected":
+      case 'selected':
         return `
           border-color: ${({ theme }: { theme: AppTheme }) => theme.colors.primary};
           background: ${({ theme }: { theme: AppTheme }) => theme.colors.primary}12;
         `;
-      case "correct":
+      case 'correct':
         return `
           border-color: ${({ theme }: { theme: AppTheme }) => theme.colors.success};
           background: ${({ theme }: { theme: AppTheme }) => theme.colors.success}18;
           color: ${({ theme }: { theme: AppTheme }) => theme.colors.success};
           font-weight: 700;
         `;
-      case "wrong":
+      case 'wrong':
         return `
           border-color: ${({ theme }: { theme: AppTheme }) => theme.colors.danger};
           background: ${({ theme }: { theme: AppTheme }) => theme.colors.danger}15;
@@ -160,7 +145,7 @@ const ChoiceButton = styled.button<{ $state: ChoiceState; $jp: boolean }>`
           font-weight: 700;
         `;
       default:
-        return "";
+        return '';
     }
   }}
 `;

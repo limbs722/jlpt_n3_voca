@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import { QuizRunner } from "@/features/quiz";
-import { Header } from "@/widgets/header";
-import { BottomNav } from "@/widgets/bottom-nav";
-import { Container } from "@/shared/ui/Container";
+import { QuizRunner } from '@/features/quiz';
+import { Container } from '@/shared/ui/Container';
+import { BottomNav } from '@/widgets/bottom-nav';
+import { Header } from '@/widgets/header';
 
 export const QuizPage = () => (
   <>

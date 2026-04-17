@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
-import Link from "next/link";
+import Link from 'next/link';
 
-import { LoginButton } from "@/features/auth";
-import { APP_NAME } from "@/shared/config/constants";
+import styled from '@emotion/styled';
+
+import { LoginButton } from '@/features/auth';
+import { APP_NAME } from '@/shared/config/constants';
 
 interface Props {
   title?: string;
@@ -14,7 +15,7 @@ interface Props {
   hideAuth?: boolean;
 }
 
-export const Header = ({ title, showBack, backHref = "/", right, hideAuth }: Props) => (
+export const Header = ({ title, showBack, backHref = '/', right, hideAuth }: Props) => (
   <Bar>
     <Left>
       {showBack ? (

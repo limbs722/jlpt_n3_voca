@@ -1,15 +1,15 @@
 'use client';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useAtom, useSetAtom } from 'jotai';
 import { useCallback, useEffect, useRef } from 'react';
+
+import { useAtom, useSetAtom } from 'jotai';
 
 import { userAtom } from '@/entities/auth';
 import { getSupabaseBrowserClient } from '@/shared/lib/supabase/client';
 
 import { progressAtom, recordAnswerAtom } from '../model/atoms';
-import type { ProgressMap, ProgressStatus, WordProgress } from '../model/types';
 
+import type { ProgressMap, ProgressStatus, WordProgress } from '../model/types';
 import type { Database } from '@/shared/types/database';
 
 type ProgressRow = Database['public']['Tables']['user_progress']['Row'];
@@ -25,10 +25,7 @@ const fetchProgressFromSupabase = async (userId: string): Promise<ProgressMap | 
   const supabase = getSupabaseBrowserClient();
   if (!supabase) return null;
 
-  const { data, error } = await supabase
-    .from('user_progress')
-    .select('*')
-    .eq('user_id', userId);
+  const { data, error } = await supabase.from('user_progress').select('*').eq('user_id', userId);
 
   if (error) {
     console.warn('[progress] supabase read failed', error);
@@ -50,10 +47,7 @@ const fetchProgressFromSupabase = async (userId: string): Promise<ProgressMap | 
 // ─────────────────────────────────────────────
 // 단일 단어 progress upsert
 // ─────────────────────────────────────────────
-const upsertProgressToSupabase = async (
-  userId: string,
-  entry: WordProgress,
-): Promise<void> => {
+const upsertProgressToSupabase = async (userId: string, entry: WordProgress): Promise<void> => {
   const supabase = getSupabaseBrowserClient();
   if (!supabase) return;
 
@@ -74,10 +68,7 @@ const upsertProgressToSupabase = async (
 // ─────────────────────────────────────────────
 // 로그인 시 로컬 데이터를 Supabase로 마이그레이션
 // ─────────────────────────────────────────────
-export const migrateLocalProgressToSupabase = async (
-  userId: string,
-  localProgress: ProgressMap,
-): Promise<void> => {
+export const migrateLocalProgressToSupabase = async (userId: string, localProgress: ProgressMap): Promise<void> => {
   const supabase = getSupabaseBrowserClient();
   if (!supabase) return;
 
@@ -94,9 +85,7 @@ export const migrateLocalProgressToSupabase = async (
     updated_at: new Date().toISOString(),
   }));
 
-  await supabase
-    .from('user_progress')
-    .upsert(rows, { onConflict: 'user_id,word_id' });
+  await supabase.from('user_progress').upsert(rows, { onConflict: 'user_id,word_id' });
 };
 
 // ─────────────────────────────────────────────

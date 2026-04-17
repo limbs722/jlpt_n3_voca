@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { atom } from "jotai";
+import { atom } from 'jotai';
 
 export const flashcardIndexAtom = atom(0);
 export const flashcardFlippedAtom = atom(false);

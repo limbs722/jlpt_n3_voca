@@ -3,25 +3,19 @@
 // shape (Tables / Views / Functions / Enums / CompositeTypes) in sync with
 // Supabase's generator output so postgrest-js can infer Row types correctly.
 
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[];
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export type PartOfSpeech =
-  | "noun"
-  | "verb"
-  | "i-adjective"
-  | "na-adjective"
-  | "adverb"
-  | "conjunction"
-  | "expression"
-  | "other";
+  | 'noun'
+  | 'verb'
+  | 'i-adjective'
+  | 'na-adjective'
+  | 'adverb'
+  | 'conjunction'
+  | 'expression'
+  | 'other';
 
-export type ProgressStatusDb = "new" | "learning" | "known";
+export type ProgressStatusDb = 'new' | 'learning' | 'known';
 
 export type Database = {
   public: {
@@ -89,11 +83,11 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "examples_word_id_fkey";
-            columns: ["word_id"];
+            foreignKeyName: 'examples_word_id_fkey';
+            columns: ['word_id'];
             isOneToOne: false;
-            referencedRelation: "words";
-            referencedColumns: ["id"];
+            referencedRelation: 'words';
+            referencedColumns: ['id'];
           },
         ];
       };
@@ -118,11 +112,11 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "user_favorites_word_id_fkey";
-            columns: ["word_id"];
+            foreignKeyName: 'user_favorites_word_id_fkey';
+            columns: ['word_id'];
             isOneToOne: false;
-            referencedRelation: "words";
-            referencedColumns: ["id"];
+            referencedRelation: 'words';
+            referencedColumns: ['id'];
           },
         ];
       };
@@ -159,11 +153,11 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "user_progress_word_id_fkey";
-            columns: ["word_id"];
+            foreignKeyName: 'user_progress_word_id_fkey';
+            columns: ['word_id'];
             isOneToOne: false;
-            referencedRelation: "words";
-            referencedColumns: ["id"];
+            referencedRelation: 'words';
+            referencedColumns: ['id'];
           },
         ];
       };

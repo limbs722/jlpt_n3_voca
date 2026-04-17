@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
-import { useAtomValue } from "jotai";
+import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
 
-import { useFavorites } from "@/entities/favorite";
-import { statsAtom } from "@/entities/user-progress";
-import { useWordsQuery } from "@/entities/word";
+import { useFavorites } from '@/entities/favorite';
+import { statsAtom } from '@/entities/user-progress';
+import { useWordsQuery } from '@/entities/word';
 
 export const StatsDashboard = () => {
   const stats = useAtomValue(statsAtom);
@@ -13,10 +13,10 @@ export const StatsDashboard = () => {
   const { data: words = [] } = useWordsQuery();
 
   const items = [
-    { label: "전체 단어", value: words.length },
-    { label: "학습 중", value: stats.learning },
-    { label: "외운 단어", value: stats.known },
-    { label: "즐겨찾기", value: favoriteIds.length },
+    { label: '전체 단어', value: words.length },
+    { label: '학습 중', value: stats.learning },
+    { label: '외운 단어', value: stats.known },
+    { label: '즐겨찾기', value: favoriteIds.length },
   ];
 
   return (

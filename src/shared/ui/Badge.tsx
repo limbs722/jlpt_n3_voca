@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-type Tone = "neutral" | "primary" | "success" | "warning" | "info";
+type Tone = 'neutral' | 'primary' | 'success' | 'warning' | 'info';
 
 export const Badge = styled.span<{ tone?: Tone }>`
   display: inline-flex;
@@ -13,15 +13,15 @@ export const Badge = styled.span<{ tone?: Tone }>`
   font-weight: 600;
   line-height: 1.6;
   letter-spacing: 0.02em;
-  ${({ theme, tone = "neutral" }) => {
+  ${({ theme, tone = 'neutral' }) => {
     switch (tone) {
-      case "primary":
+      case 'primary':
         return `background: ${theme.colors.primary}15; color: ${theme.colors.primary};`;
-      case "success":
+      case 'success':
         return `background: ${theme.colors.success}15; color: ${theme.colors.success};`;
-      case "warning":
+      case 'warning':
         return `background: ${theme.colors.warning}18; color: ${theme.colors.warning};`;
-      case "info":
+      case 'info':
         return `background: ${theme.colors.accent}15; color: ${theme.colors.accent};`;
       default:
         return `background: ${theme.colors.surface}; color: ${theme.colors.textMuted};`;

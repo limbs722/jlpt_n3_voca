@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
-import type { ButtonHTMLAttributes } from "react";
+import type { ButtonHTMLAttributes } from 'react';
 
-type Variant = "primary" | "secondary" | "ghost" | "danger";
-type Size = "sm" | "md" | "lg";
+import styled from '@emotion/styled';
+
+type Variant = 'primary' | 'secondary' | 'ghost' | 'danger';
+type Size = 'sm' | 'md' | 'lg';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;
@@ -12,24 +13,14 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
 }
 
-export const Button = ({
-  variant = "primary",
-  size = "md",
-  fullWidth = false,
-  ...rest
-}: ButtonProps) => (
-  <StyledButton
-    $variant={variant}
-    $size={size}
-    $fullWidth={fullWidth}
-    {...rest}
-  />
+export const Button = ({ variant = 'primary', size = 'md', fullWidth = false, ...rest }: ButtonProps) => (
+  <StyledButton $variant={variant} $size={size} $fullWidth={fullWidth} {...rest} />
 );
 
 const SIZE_MAP: Record<Size, { pad: string; font: string; height: string }> = {
-  sm: { pad: "0 12px", font: "13px", height: "32px" },
-  md: { pad: "0 16px", font: "14px", height: "40px" },
-  lg: { pad: "0 22px", font: "16px", height: "48px" },
+  sm: { pad: '0 12px', font: '13px', height: '32px' },
+  md: { pad: '0 16px', font: '14px', height: '40px' },
+  lg: { pad: '0 22px', font: '16px', height: '48px' },
 };
 
 const StyledButton = styled.button<{
@@ -47,7 +38,7 @@ const StyledButton = styled.button<{
   height: ${({ $size }) => SIZE_MAP[$size].height};
   padding: ${({ $size }) => SIZE_MAP[$size].pad};
   font-size: ${({ $size }) => SIZE_MAP[$size].font};
-  width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
+  width: ${({ $fullWidth }) => ($fullWidth ? '100%' : 'auto')};
   transition:
     background 0.15s ease,
     transform 0.06s ease,
@@ -63,26 +54,26 @@ const StyledButton = styled.button<{
 
   ${({ theme, $variant }) => {
     switch ($variant) {
-      case "primary":
+      case 'primary':
         return `
           background: ${theme.colors.primary};
           color: #fff;
           &:hover:not(:disabled) { background: ${theme.colors.primaryHover}; }
         `;
-      case "secondary":
+      case 'secondary':
         return `
           background: ${theme.colors.bgElevated};
           color: ${theme.colors.text};
           border-color: ${theme.colors.border};
           &:hover:not(:disabled) { background: ${theme.colors.surface}; }
         `;
-      case "ghost":
+      case 'ghost':
         return `
           background: transparent;
           color: ${theme.colors.text};
           &:hover:not(:disabled) { background: ${theme.colors.surface}; }
         `;
-      case "danger":
+      case 'danger':
         return `
           background: ${theme.colors.danger};
           color: #fff;

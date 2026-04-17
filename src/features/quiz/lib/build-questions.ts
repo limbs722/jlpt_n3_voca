@@ -1,19 +1,15 @@
-import type { Word } from "@/entities/word";
-import { pickRandom, shuffle } from "@/shared/lib/utils/shuffle";
+import { pickRandom, shuffle } from '@/shared/lib/utils/shuffle';
 
-import type { QuizQuestion } from "../model/types";
+import type { QuizQuestion } from '../model/types';
+import type { Word } from '@/entities/word';
 
-export const buildQuizQuestions = (
-  words: Word[],
-  count = 10,
-): QuizQuestion[] => {
+export const buildQuizQuestions = (words: Word[], count = 10): QuizQuestion[] => {
   if (words.length < 4) return [];
   const pool = shuffle(words);
   const selected = pool.slice(0, Math.min(count, pool.length));
 
   return selected.map((word) => {
-    const direction: QuizQuestion["direction"] =
-      Math.random() > 0.5 ? "jp-to-ko" : "ko-to-jp";
+    const direction: QuizQuestion['direction'] = Math.random() > 0.5 ? 'jp-to-ko' : 'ko-to-jp';
 
     const distractors = pickRandom(
       words.filter((w) => w.id !== word.id),
@@ -22,10 +18,7 @@ export const buildQuizQuestions = (
     const choices = shuffle(
       [word, ...distractors].map((w) => ({
         wordId: w.id,
-        text:
-          direction === "jp-to-ko"
-            ? w.meaning_ko
-            : w.kanji ?? w.reading,
+        text: direction === 'jp-to-ko' ? w.meaning_ko : (w.kanji ?? w.reading),
       })),
     );
 

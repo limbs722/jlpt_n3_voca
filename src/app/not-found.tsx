@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
-import Link from "next/link";
+import Link from 'next/link';
 
-import { Button } from "@/shared/ui/Button";
+import styled from '@emotion/styled';
+
+import { Button } from '@/shared/ui/Button';
 
 export default function NotFound() {
   return (

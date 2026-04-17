@@ -1,10 +1,11 @@
 'use client';
 
+import { useState, useEffect, useRef, type ReactNode } from 'react';
+
 import { ThemeProvider } from '@emotion/react';
 import { QueryClientProvider, HydrationBoundary, type DehydratedState } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Provider as JotaiProvider, useSetAtom, useAtomValue } from 'jotai';
-import { useState, useEffect, useRef, type ReactNode } from 'react';
 
 import { authLoadingAtom, userAtom } from '@/entities/auth';
 import { localFavoritesAtom } from '@/entities/favorite';
@@ -13,6 +14,7 @@ import { EmotionRegistry } from '@/shared/lib/emotion/registry';
 import { createQueryClient } from '@/shared/lib/query/query-client';
 import { getSupabaseBrowserClient } from '@/shared/lib/supabase/client';
 import { GlobalStyles, theme } from '@/shared/ui';
+
 import type { User } from '@supabase/supabase-js';
 
 interface ProvidersProps {
@@ -49,38 +51,35 @@ const AuthInitializer = () => {
     });
 
     // 로그인/로그아웃 이벤트 구독
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        const newUser = session?.user ?? null;
-        const prevUser = prevUserRef.current;
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      const newUser = session?.user ?? null;
+      const prevUser = prevUserRef.current;
 
-        setUser(newUser);
-        setAuthLoading(false);
+      setUser(newUser);
+      setAuthLoading(false);
 
-        // 새로 로그인한 경우에만 마이그레이션 실행
-        const isNewLogin = !prevUser && newUser;
-        if (isNewLogin && newUser) {
-          // 로컬 progress → Supabase 마이그레이션
-          await migrateLocalProgressToSupabase(newUser.id, localProgress);
+      // 새로 로그인한 경우에만 마이그레이션 실행
+      const isNewLogin = !prevUser && newUser;
+      if (isNewLogin && newUser) {
+        // 로컬 progress → Supabase 마이그레이션
+        await migrateLocalProgressToSupabase(newUser.id, localProgress);
 
-          // 로컬 즐겨찾기 → Supabase 마이그레이션
-          if (localFavorites.length > 0) {
-            const rows = localFavorites.map((wordId) => ({
-              user_id: newUser.id,
-              word_id: wordId,
-            }));
-            await supabase
-              .from('user_favorites')
-              .upsert(rows, { onConflict: 'user_id,word_id' });
-          }
+        // 로컬 즐겨찾기 → Supabase 마이그레이션
+        if (localFavorites.length > 0) {
+          const rows = localFavorites.map((wordId) => ({
+            user_id: newUser.id,
+            word_id: wordId,
+          }));
+          await supabase.from('user_favorites').upsert(rows, { onConflict: 'user_id,word_id' });
         }
+      }
 
-        prevUserRef.current = newUser;
-      },
-    );
+      prevUserRef.current = newUser;
+    });
 
     return () => subscription.unsubscribe();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return null;

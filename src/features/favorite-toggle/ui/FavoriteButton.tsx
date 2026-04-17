@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
-import type { MouseEvent } from "react";
+import type { MouseEvent } from 'react';
 
-import { useFavorites } from "@/entities/favorite";
-import { AppTheme } from "@/shared/ui/theme";
+import styled from '@emotion/styled';
+
+import { useFavorites } from '@/entities/favorite';
+import { AppTheme } from '@/shared/ui/theme';
 
 interface Props {
   wordId: number;
@@ -25,16 +26,18 @@ export const FavoriteButton = ({ wordId, size = 22 }: Props) => {
     <Btn
       onClick={handleClick}
       $active={active}
-      aria-label={active ? "즐겨찾기 해제" : "즐겨찾기"}
+      aria-label={active ? '즐겨찾기 해제' : '즐겨찾기'}
       $size={size}
       type="button"
     >
-      {active ? "★" : "☆"}
+      {active ? '★' : '☆'}
     </Btn>
   );
 };
 
-const Btn = styled.button<{ $active: boolean; $size: number }>`
+const Btn = styled('button', {
+  shouldForwardProp: (prop) => prop !== '$active' && prop !== '$size',
+})<{ $active: boolean; $size: number }>`
   display: inline-flex;
   align-items: center;
   justify-content: center;

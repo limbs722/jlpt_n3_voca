@@ -1,18 +1,13 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import { FavoriteButton } from "@/features/favorite-toggle";
-import {
-  POS_LABEL_JP,
-  POS_LABEL_KO,
-  useWordQuery,
-  type Word,
-} from "@/entities/word";
-import { Badge } from "@/shared/ui/Badge";
-import { Container, Stack } from "@/shared/ui/Container";
-import { Header } from "@/widgets/header";
-import { BottomNav } from "@/widgets/bottom-nav";
+import { POS_LABEL_JP, POS_LABEL_KO, useWordQuery, type Word } from '@/entities/word';
+import { FavoriteButton } from '@/features/favorite-toggle';
+import { Badge } from '@/shared/ui/Badge';
+import { Container, Stack } from '@/shared/ui/Container';
+import { BottomNav } from '@/widgets/bottom-nav';
+import { Header } from '@/widgets/header';
 
 interface Props {
   wordId: number;
@@ -23,11 +18,7 @@ export const WordDetailPage = ({ wordId }: Props) => {
 
   return (
     <>
-      <Header
-        title="단어 상세"
-        showBack
-        right={word ? <FavoriteButton wordId={word.id} /> : null}
-      />
+      <Header title="단어 상세" showBack right={word ? <FavoriteButton wordId={word.id} /> : null} />
       <Container>
         <Main>
           {isLoading && <Info>불러오는 중…</Info>}

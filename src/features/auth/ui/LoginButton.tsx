@@ -1,7 +1,8 @@
 'use client';
 
-import styled from '@emotion/styled';
 import Image from 'next/image';
+
+import styled from '@emotion/styled';
 
 import { useAuth, useSignInWithGoogle, useSignOut } from '@/entities/auth';
 
@@ -78,7 +79,9 @@ const SignInButton = styled.button`
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
   white-space: nowrap;
 
   &:hover {

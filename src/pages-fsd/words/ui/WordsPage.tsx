@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import { CategoryFilter, SearchBar } from "@/features/word-search";
-import { Container, Stack } from "@/shared/ui/Container";
-import { WordList } from "@/widgets/word-list";
-import { Header } from "@/widgets/header";
-import { BottomNav } from "@/widgets/bottom-nav";
+import { CategoryFilter, SearchBar } from '@/features/word-search';
+import { Container, Stack } from '@/shared/ui/Container';
+import { BottomNav } from '@/widgets/bottom-nav';
+import { Header } from '@/widgets/header';
+import { WordList } from '@/widgets/word-list';
 
 export const WordsPage = () => (
   <>

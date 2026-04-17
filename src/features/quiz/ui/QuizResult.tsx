@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
-import { useAtomValue } from "jotai";
+import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
 
-import { WordCard, useWordsQuery } from "@/entities/word";
-import { Button } from "@/shared/ui/Button";
-import { Stack } from "@/shared/ui/Container";
+import { WordCard, useWordsQuery } from '@/entities/word';
+import { Button } from '@/shared/ui/Button';
+import { Stack } from '@/shared/ui/Container';
+import { AppTheme } from '@/shared/ui/theme';
 
-import { quizResultAtom } from "../model/atoms";
-import { AppTheme } from "@/shared/ui/theme";
+import { quizResultAtom } from '../model/atoms';
 
 interface Props {
   onRestart: () => void;
@@ -20,13 +20,9 @@ export const QuizResultView = ({ onRestart }: Props) => {
 
   if (!result) return null;
 
-  const percent = Math.round(
-    (result.correctCount / result.totalQuestions) * 100,
-  );
+  const percent = Math.round((result.correctCount / result.totalQuestions) * 100);
 
-  const incorrectWords = words.filter((w) =>
-    result.incorrectWordIds.includes(w.id),
-  );
+  const incorrectWords = words.filter((w) => result.incorrectWordIds.includes(w.id));
 
   return (
     <Stack gap={5}>
@@ -40,12 +36,12 @@ export const QuizResultView = ({ onRestart }: Props) => {
         <Percent>{percent}점</Percent>
         <Message>
           {percent === 100
-            ? "완벽해요! 이 구간은 통과예요 🎯"
+            ? '완벽해요! 이 구간은 통과예요 🎯'
             : percent >= 80
-              ? "아주 잘했어요! 조금만 더 가다듬어 볼까요?"
+              ? '아주 잘했어요! 조금만 더 가다듬어 볼까요?'
               : percent >= 60
-                ? "꾸준히만 하면 금방 늘 거예요 💪"
-                : "틀린 단어를 다시 한 번 천천히 확인해 보세요."}
+                ? '꾸준히만 하면 금방 늘 거예요 💪'
+                : '틀린 단어를 다시 한 번 천천히 확인해 보세요.'}
         </Message>
       </Summary>
 

@@ -1,4 +1,4 @@
-import type { PartOfSpeech } from "@/shared/types/database";
+import type { PartOfSpeech } from '@/shared/types/database';
 
 export interface Example {
   id?: number;
@@ -20,23 +20,23 @@ export interface Word {
 }
 
 export const POS_LABEL_KO: Record<PartOfSpeech, string> = {
-  noun: "명사",
-  verb: "동사",
-  "i-adjective": "い형용사",
-  "na-adjective": "な형용사",
-  adverb: "부사",
-  conjunction: "접속사",
-  expression: "표현",
-  other: "기타",
+  noun: '명사',
+  verb: '동사',
+  'i-adjective': 'い형용사',
+  'na-adjective': 'な형용사',
+  adverb: '부사',
+  conjunction: '접속사',
+  expression: '표현',
+  other: '기타',
 };
 
 export const POS_LABEL_JP: Record<PartOfSpeech, string> = {
-  noun: "名詞",
-  verb: "動詞",
-  "i-adjective": "形容詞",
-  "na-adjective": "形容動詞",
-  adverb: "副詞",
-  conjunction: "接続詞",
-  expression: "表現",
-  other: "その他",
+  noun: '名詞',
+  verb: '動詞',
+  'i-adjective': '形容詞',
+  'na-adjective': '形容動詞',
+  adverb: '副詞',
+  conjunction: '接続詞',
+  expression: '表現',
+  other: 'その他',
 };

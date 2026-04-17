@@ -34,10 +34,7 @@ const resolveUserId = (authUserId: string | undefined): string => {
 const fetchFavoritesFromSupabase = async (userId: string): Promise<number[] | null> => {
   const supabase = getSupabaseBrowserClient();
   if (!supabase) return null;
-  const { data, error } = await supabase
-    .from('user_favorites')
-    .select('word_id')
-    .eq('user_id', userId);
+  const { data, error } = await supabase.from('user_favorites').select('word_id').eq('user_id', userId);
   if (error) {
     console.warn('[favorites] supabase read failed', error);
     return null;
@@ -76,11 +73,7 @@ export const useFavorites = () => {
           };
           await supabase.from('user_favorites').upsert(payload, { onConflict: 'user_id,word_id' });
         } else {
-          await supabase
-            .from('user_favorites')
-            .delete()
-            .eq('user_id', userId)
-            .eq('word_id', params.wordId);
+          await supabase.from('user_favorites').delete().eq('user_id', userId).eq('word_id', params.wordId);
         }
       }
       // 로컬 캐시도 동기화 (오프라인 / 비로그인 대비)
@@ -95,9 +88,7 @@ export const useFavorites = () => {
     onMutate: async ({ wordId, next }) => {
       await qc.cancelQueries({ queryKey: FAVORITE_KEYS.all(userId) });
       const prev = qc.getQueryData<number[]>(FAVORITE_KEYS.all(userId)) ?? [];
-      const optimistic = next
-        ? Array.from(new Set([...prev, wordId]))
-        : prev.filter((id) => id !== wordId);
+      const optimistic = next ? Array.from(new Set([...prev, wordId])) : prev.filter((id) => id !== wordId);
       qc.setQueryData<number[]>(FAVORITE_KEYS.all(userId), optimistic);
       return { prev };
     },

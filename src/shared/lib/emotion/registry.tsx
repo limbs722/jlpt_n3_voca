@@ -1,9 +1,11 @@
-"use client";
+'use client';
 
-import createCache, { type EmotionCache } from "@emotion/cache";
-import { CacheProvider } from "@emotion/react";
-import { useServerInsertedHTML } from "next/navigation";
-import { useState, type ReactNode } from "react";
+import { useState, type ReactNode } from 'react';
+
+import { useServerInsertedHTML } from 'next/navigation';
+
+import createCache, { type EmotionCache } from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
 
 interface Props {
   children: ReactNode;
@@ -15,7 +17,7 @@ interface Props {
  */
 export const EmotionRegistry = ({ children }: Props) => {
   const [registry] = useState(() => {
-    const cache = createCache({ key: "em" });
+    const cache = createCache({ key: 'em' });
     cache.compat = true;
     const prevInsert = cache.insert;
     let inserted: { name: string; isGlobal: boolean }[] = [];
@@ -40,12 +42,12 @@ export const EmotionRegistry = ({ children }: Props) => {
   useServerInsertedHTML(() => {
     const names = registry.flush();
     if (names.length === 0) return null;
-    let styles = "";
+    let styles = '';
     let dataEmotionAttribute = registry.cache.key;
     const globals: { name: string; style: string }[] = [];
     names.forEach(({ name, isGlobal }) => {
       const style = registry.cache.inserted[name];
-      if (typeof style === "string") {
+      if (typeof style === 'string') {
         if (isGlobal) {
           globals.push({ name, style });
         } else {
@@ -63,12 +65,7 @@ export const EmotionRegistry = ({ children }: Props) => {
             dangerouslySetInnerHTML={{ __html: style }}
           />
         ))}
-        {styles && (
-          <style
-            data-emotion={dataEmotionAttribute}
-            dangerouslySetInnerHTML={{ __html: styles }}
-          />
-        )}
+        {styles && <style data-emotion={dataEmotionAttribute} dangerouslySetInnerHTML={{ __html: styles }} />}
       </>
     );
   });

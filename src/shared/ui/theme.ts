@@ -46,26 +46,26 @@ export interface AppTheme {
 
 export const theme: AppTheme = {
   colors: {
-    bg: "#FAFAF7",
-    bgElevated: "#FFFFFF",
-    surface: "#F3F2EE",
-    border: "#E6E4DE",
-    text: "#1B1B1B",
-    textMuted: "#6B6B6B",
-    textSubtle: "#9A9A9A",
-    primary: "#D93A3A", // 빨간색 — 일본 단어장 느낌 살짝
-    primaryHover: "#B82F2F",
-    accent: "#2563EB",
-    success: "#15803D",
-    warning: "#B45309",
-    danger: "#DC2626",
-    overlay: "rgba(0,0,0,0.45)",
+    bg: '#FAFAF7',
+    bgElevated: '#FFFFFF',
+    surface: '#F3F2EE',
+    border: '#E6E4DE',
+    text: '#1B1B1B',
+    textMuted: '#6B6B6B',
+    textSubtle: '#9A9A9A',
+    primary: '#D93A3A', // 빨간색 — 일본 단어장 느낌 살짝
+    primaryHover: '#B82F2F',
+    accent: '#2563EB',
+    success: '#15803D',
+    warning: '#B45309',
+    danger: '#DC2626',
+    overlay: 'rgba(0,0,0,0.45)',
   },
   radii: {
-    sm: "6px",
-    md: "10px",
-    lg: "16px",
-    pill: "9999px",
+    sm: '6px',
+    md: '10px',
+    lg: '16px',
+    pill: '9999px',
   },
   spacing: (n: number) => `${n * 4}px`,
   fonts: {
@@ -74,14 +74,14 @@ export const theme: AppTheme = {
     serif: `"Noto Serif JP", ui-serif, serif`,
   },
   shadows: {
-    sm: "0 1px 2px rgba(0,0,0,0.04)",
-    md: "0 4px 16px rgba(0,0,0,0.06)",
-    lg: "0 10px 32px rgba(0,0,0,0.08)",
+    sm: '0 1px 2px rgba(0,0,0,0.04)',
+    md: '0 4px 16px rgba(0,0,0,0.06)',
+    lg: '0 10px 32px rgba(0,0,0,0.08)',
   },
   breakpoints: {
-    mobile: "480px",
-    tablet: "768px",
-    desktop: "1024px",
+    mobile: '480px',
+    tablet: '768px',
+    desktop: '1024px',
   },
   zIndex: {
     nav: 40,
@@ -90,7 +90,6 @@ export const theme: AppTheme = {
   },
 };
 
-declare module "@emotion/react" {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+declare module '@emotion/react' {
   export interface Theme extends AppTheme {}
 }

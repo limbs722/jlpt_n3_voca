@@ -1,11 +1,12 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
-import { useAtomValue } from "jotai";
-import Link from "next/link";
-import { useMemo } from "react";
+import { useMemo } from 'react';
 
-import { FavoriteButton } from "@/features/favorite-toggle";
+import Link from 'next/link';
+
+import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
+
 import {
   WordCard,
   searchQueryAtom,
@@ -13,8 +14,9 @@ import {
   showEssentialOnlyAtom,
   useWordsQuery,
   type Word,
-} from "@/entities/word";
-import { ROUTES } from "@/shared/config/constants";
+} from '@/entities/word';
+import { FavoriteButton } from '@/features/favorite-toggle';
+import { ROUTES } from '@/shared/config/constants';
 
 interface Props {
   words?: Word[];
@@ -32,11 +34,11 @@ export const WordList = ({ words: overrideWords, empty }: Props) => {
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
     return source.filter((w) => {
-      if (category !== "전체" && w.category !== category) return false;
+      if (category !== '전체' && w.category !== category) return false;
       if (essentialOnly && !w.is_essential) return false;
       if (!q) return true;
       return (
-        (w.kanji ?? "").toLowerCase().includes(q) ||
+        (w.kanji ?? '').toLowerCase().includes(q) ||
         w.reading.toLowerCase().includes(q) ||
         w.meaning_ko.toLowerCase().includes(q)
       );
@@ -44,19 +46,14 @@ export const WordList = ({ words: overrideWords, empty }: Props) => {
   }, [source, search, category, essentialOnly]);
 
   if (isLoading) return <Info>로딩 중…</Info>;
-  if (filtered.length === 0)
-    return <Info>{empty ?? "해당 조건에 맞는 단어가 없습니다."}</Info>;
+  if (filtered.length === 0) return <Info>{empty ?? '해당 조건에 맞는 단어가 없습니다.'}</Info>;
 
   return (
     <List>
       {filtered.map((w) => (
         <Link key={w.id} href={ROUTES.WORD_DETAIL(w.id)} legacyBehavior>
-          <a style={{ textDecoration: "none", color: "inherit" }}>
-            <WordCard
-              word={w}
-              onClick={() => {}}
-              right={<FavoriteButton wordId={w.id} />}
-            />
+          <a style={{ textDecoration: 'none', color: 'inherit' }}>
+            <WordCard word={w} onClick={() => {}} right={<FavoriteButton wordId={w.id} />} />
           </a>
         </Link>
       ))}

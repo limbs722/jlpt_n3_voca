@@ -1,12 +1,13 @@
-"use client";
+'use client';
 
-import styled from "@emotion/styled";
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
-import { Badge } from "@/shared/ui/Badge";
+import styled from '@emotion/styled';
 
-import { POS_LABEL_KO, type Word } from "../model/types";
-import { AppTheme } from "@/shared/ui/theme";
+import { Badge } from '@/shared/ui/Badge';
+import { AppTheme } from '@/shared/ui/theme';
+
+import { POS_LABEL_KO, type Word } from '../model/types';
 
 interface Props {
   word: Word;
@@ -43,27 +44,16 @@ const Shell = styled.div<{ $clickable: boolean; $compact: boolean }>`
   background: ${({ theme }: { theme: AppTheme }) => theme.colors.bgElevated};
   border: 1px solid ${({ theme }: { theme: AppTheme }) => theme.colors.border};
   border-radius: ${({ theme }: { theme: AppTheme }) => theme.radii.lg};
-  cursor: ${({ $clickable }: { $clickable: boolean }) =>
-    $clickable ? "pointer" : "default"};
+  cursor: ${({ $clickable }: { $clickable: boolean }) => ($clickable ? 'pointer' : 'default')};
   transition:
     border-color 0.15s ease,
     box-shadow 0.15s ease;
 
   &:hover {
-    border-color: ${({
-      theme,
-      $clickable,
-    }: {
-      theme: AppTheme;
-      $clickable: boolean;
-    }) => ($clickable ? theme.colors.primary : theme.colors.border)};
-    box-shadow: ${({
-      theme,
-      $clickable,
-    }: {
-      theme: AppTheme;
-      $clickable: boolean;
-    }) => ($clickable ? theme.shadows.sm : "none")};
+    border-color: ${({ theme, $clickable }: { theme: AppTheme; $clickable: boolean }) =>
+      $clickable ? theme.colors.primary : theme.colors.border};
+    box-shadow: ${({ theme, $clickable }: { theme: AppTheme; $clickable: boolean }) =>
+      $clickable ? theme.shadows.sm : 'none'};
   }
 `;
 

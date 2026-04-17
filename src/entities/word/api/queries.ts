@@ -1,33 +1,29 @@
-"use client";
+'use client';
 
-import {
-  useQuery,
-  type UseQueryOptions,
-} from "@tanstack/react-query";
+import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 
-import { SEED_WORDS } from "@/shared/config/seed-data/words";
-import { getSupabaseBrowserClient } from "@/shared/lib/supabase/client";
-import type { Database } from "@/shared/types/database";
+import { SEED_WORDS } from '@/shared/config/seed-data/words';
+import { getSupabaseBrowserClient } from '@/shared/lib/supabase/client';
 
-import type { Word } from "../model/types";
+import type { Word } from '../model/types';
+import type { Database } from '@/shared/types/database';
 
 export const WORD_QUERY_KEYS = {
-  all: ["words"] as const,
-  list: (filters?: { category?: string; essentialOnly?: boolean }) =>
-    ["words", "list", filters ?? {}] as const,
-  detail: (id: number) => ["words", "detail", id] as const,
+  all: ['words'] as const,
+  list: (filters?: { category?: string; essentialOnly?: boolean }) => ['words', 'list', filters ?? {}] as const,
+  detail: (id: number) => ['words', 'detail', id] as const,
 };
 
-type WordRow = Database["public"]["Tables"]["words"]["Row"];
-type ExampleRow = Database["public"]["Tables"]["examples"]["Row"];
+type WordRow = Database['public']['Tables']['words']['Row'];
+type ExampleRow = Database['public']['Tables']['examples']['Row'];
 
 type WordWithExamplesRow = WordRow & {
-  examples: Pick<ExampleRow, "id" | "sentence_jp" | "sentence_ko">[] | null;
+  examples: Pick<ExampleRow, 'id' | 'sentence_jp' | 'sentence_ko'>[] | null;
 };
 
 const supabaseWordToWord = (
   row: WordRow,
-  examples: Pick<ExampleRow, "id" | "sentence_jp" | "sentence_ko">[] = [],
+  examples: Pick<ExampleRow, 'id' | 'sentence_jp' | 'sentence_ko'>[] = [],
 ): Word => ({
   id: row.id,
   kanji: row.kanji,
@@ -50,17 +46,17 @@ const fetchWordsFromSupabase = async (): Promise<Word[] | null> => {
   if (!supabase) return null;
 
   const { data: words, error } = await supabase
-    .from("words")
+    .from('words')
     .select(
       `id,kanji,reading,meaning_ko,meaning_extra,part_of_speech,category,
        frequency_rank,is_essential,created_at,
        examples ( id, sentence_jp, sentence_ko )`,
     )
-    .order("frequency_rank", { ascending: true })
+    .order('frequency_rank', { ascending: true })
     .returns<WordWithExamplesRow[]>();
 
   if (error) {
-    console.error("[words] supabase error", error);
+    console.error('[words] supabase error', error);
     return null;
   }
   if (!words) return [];
@@ -74,9 +70,7 @@ const fetchWords = async (): Promise<Word[]> => {
   return SEED_WORDS;
 };
 
-export const useWordsQuery = (
-  options?: Omit<UseQueryOptions<Word[]>, "queryKey" | "queryFn">,
-) =>
+export const useWordsQuery = (options?: Omit<UseQueryOptions<Word[]>, 'queryKey' | 'queryFn'>) =>
   useQuery<Word[]>({
     queryKey: WORD_QUERY_KEYS.all,
     queryFn: fetchWords,
@@ -85,7 +79,7 @@ export const useWordsQuery = (
 
 export const useWordQuery = (id: number | null) =>
   useQuery<Word | null>({
-    queryKey: id ? WORD_QUERY_KEYS.detail(id) : ["words", "detail", "null"],
+    queryKey: id ? WORD_QUERY_KEYS.detail(id) : ['words', 'detail', 'null'],
     enabled: id !== null,
     queryFn: async () => {
       const all = await fetchWords();

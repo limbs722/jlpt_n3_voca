@@ -1,4 +1,4 @@
-export type ProgressStatus = "new" | "learning" | "known";
+export type ProgressStatus = 'new' | 'learning' | 'known';
 
 export interface WordProgress {
   wordId: number;

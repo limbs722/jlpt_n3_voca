@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Global, css } from "@emotion/react";
+import { Global, css } from '@emotion/react';
 
 export const GlobalStyles = () => (
   <Global
@@ -23,6 +23,8 @@ export const GlobalStyles = () => (
       }
       body {
         min-height: 100dvh;
+        /* fixed BottomNav 높이(약 60px) + safe-area 만큼 여백 확보 */
+        padding-bottom: calc(60px + env(safe-area-inset-bottom));
       }
       button {
         font-family: inherit;

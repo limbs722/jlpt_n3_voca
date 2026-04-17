@@ -1,9 +1,11 @@
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
-import type { SupabaseClient } from "@supabase/supabase-js";
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers';
 
-import { env, isSupabaseConfigured } from "@/shared/config/env";
-import type { Database } from "@/shared/types/database";
+import { createServerClient, type CookieOptions } from '@supabase/ssr';
+
+import { env, isSupabaseConfigured } from '@/shared/config/env';
+
+import type { Database } from '@/shared/types/database';
+import type { SupabaseClient } from '@supabase/supabase-js';
 
 export type TypedSupabaseServerClient = SupabaseClient<Database>;
 
@@ -24,7 +26,7 @@ export const getSupabaseServerClient = (): TypedSupabaseServerClient | null => {
       },
       remove(name: string, options: CookieOptions) {
         try {
-          cookieStore.set({ name, value: "", ...options });
+          cookieStore.set({ name, value: '', ...options });
         } catch {
           // called from a Server Component — ignore
         }
