@@ -2,9 +2,8 @@
 
 import styled from '@emotion/styled';
 
-import type { AppTheme } from '@/shared/ui/theme';
-
 import type { QuizQuestion } from '../model/types';
+import type { AppTheme } from '@/shared/ui/theme';
 
 interface Props {
   question: QuizQuestion;
@@ -97,8 +96,7 @@ const PromptLabel = styled.div`
 const PromptValue = styled('div', {
   shouldForwardProp: (prop) => prop !== '$jp',
 })<{ $jp: boolean }>`
-  font-family: ${({ theme, $jp }: { theme: AppTheme; $jp: boolean }) =>
-    $jp ? theme.fonts.jp : theme.fonts.base};
+  font-family: ${({ theme, $jp }: { theme: AppTheme; $jp: boolean }) => ($jp ? theme.fonts.jp : theme.fonts.base)};
   font-size: clamp(28px, 8vw, 40px);
   font-weight: 700;
   color: ${({ theme }) => theme.colors.text};
@@ -147,8 +145,7 @@ const ChoiceButton = styled('button', {
   border-radius: ${({ theme }) => theme.radii.md};
   border: 1.5px solid ${({ theme }) => theme.colors.border};
   background: ${({ theme }) => theme.colors.bgElevated};
-  font-family: ${({ theme, $jp }: { theme: AppTheme; $jp: boolean }) =>
-    $jp ? theme.fonts.jp : theme.fonts.base};
+  font-family: ${({ theme, $jp }: { theme: AppTheme; $jp: boolean }) => ($jp ? theme.fonts.jp : theme.fonts.base)};
   font-size: 15px;
   text-align: left;
   color: ${({ theme }) => theme.colors.text};
