@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "types": ["node", "react", "react-dom"],
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "@/app/*": ["./src/app/*"],
+      "@/app-providers/*": ["./src/app-providers/*"],
+      "@/pages-fsd/*": ["./src/pages-fsd/*"],
+      "@/widgets/*": ["./src/widgets/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/entities/*": ["./src/entities/*"],
+      "@/shared/*": ["./src/shared/*"]
+    }
+  },
+  "typeRoots": ["./node_modules/@types", "./types"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", ".next", "public"]
+}

@@ -1,0 +1,63 @@
+{
+  "plugins": ["unused-imports", "import"],
+  "rules": {
+    "unused-imports/no-unused-imports": "error",
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "builtin",
+            "position": "before",
+          },
+          {
+            "pattern": "next/**",
+            "group": "builtin",
+            "position": "after",
+          },
+          {
+            "pattern": "@components/**",
+            "group": "internal",
+            "position": "after",
+          },
+          {
+            "pattern": "@utils/**",
+            "group": "internal",
+            "position": "after",
+          },
+          {
+            "pattern": "**/*.css",
+            "group": "index",
+            "position": "after",
+          },
+          {
+            "pattern": "**/*.style.{ts,tsx}",
+            "group": "index",
+            "position": "after",
+          },
+        ],
+        "pathGroupsExcludedImportTypes": ["react", "next"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true,
+        },
+      },
+    ],
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json", // 혹은 tsconfig 경로에 맞게 조정
+      },
+    },
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+  },
+  "extends": ["plugin:prettier/recommended"], // prettier와 충돌 방지 + 자동 포맷
+}
