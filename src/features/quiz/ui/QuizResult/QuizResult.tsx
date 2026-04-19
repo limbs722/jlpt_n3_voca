@@ -2,7 +2,8 @@
 
 import { useAtomValue } from 'jotai';
 
-import { WordCard, useWordsQuery } from '@/entities/word';
+import { useWordsQuery } from '@/entities/word/api';
+import { WordCard } from '@/entities/word/ui';
 import { Button } from '@/shared/ui/Button';
 import { Stack } from '@/shared/ui/Container';
 

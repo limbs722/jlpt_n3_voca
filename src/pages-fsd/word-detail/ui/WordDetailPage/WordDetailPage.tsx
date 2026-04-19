@@ -1,11 +1,12 @@
 'use client';
 
-import { POS_LABEL_JP, POS_LABEL_KO, useWordQuery, type Word } from '@/entities/word';
-import { FavoriteButton } from '@/features/favorite-toggle';
+import { useWordQuery } from '@/entities/word/api';
+import { POS_LABEL_JP, POS_LABEL_KO, type Word } from '@/entities/word/model';
+import { FavoriteButton } from '@/features/favorite-toggle/ui';
 import { Badge } from '@/shared/ui/Badge';
 import { Container, Stack } from '@/shared/ui/Container';
-import { BottomNav } from '@/widgets/bottom-nav';
-import { Header } from '@/widgets/header';
+import { BottomNav } from '@/widgets/bottom-nav/ui';
+import { Header } from '@/widgets/header/ui';
 
 import {
   BadgeRow,

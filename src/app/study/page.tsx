@@ -4,8 +4,8 @@ import { Suspense } from 'react';
 
 import { useSearchParams } from 'next/navigation';
 
-import { useFavorites } from '@/entities/favorite';
-import { StudyPage } from '@/pages-fsd/study';
+import { useFavorites } from '@/entities/favorite/api';
+import { StudyPage } from '@/pages-fsd/study/ui';
 
 // useSearchParams()를 사용하는 부분을 별도 컴포넌트로 분리
 const StudyPageInner = () => {

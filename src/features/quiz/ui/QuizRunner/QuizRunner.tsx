@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useAtom } from 'jotai';
 
-import { useRecordAnswer } from '@/entities/user-progress';
-import { useWordsQuery } from '@/entities/word';
+import { useRecordAnswer } from '@/entities/user-progress/api';
+import { useWordsQuery } from '@/entities/word/api';
 import { Button } from '@/shared/ui/Button';
 import { Stack } from '@/shared/ui/Container';
 
@@ -37,13 +37,16 @@ export const QuizRunner = ({ questionCount = 10, essentialOnly, filterIds }: Pro
   const [selected, setSelected] = useAtom(quizSelectedChoiceAtom);
   const recordAnswer = useRecordAnswer();
 
+  /** 확인 버튼을 눌러 채점이 완료된 상태 */
+  const [answered, setAnswered] = useState(false);
+
   useEffect(() => {
-    // reset when component mounts (new quiz session)
     setPhase('idle');
     setQuestions([]);
     setIndex(0);
     setIncorrect([]);
     setSelected(null);
+    setAnswered(false);
   }, [setPhase, setQuestions, setIndex, setIncorrect, setSelected]);
 
   const startQuiz = () => {
@@ -59,20 +62,30 @@ export const QuizRunner = ({ questionCount = 10, essentialOnly, filterIds }: Pro
     setIndex(0);
     setIncorrect([]);
     setSelected(null);
+    setAnswered(false);
     setPhase('running');
   };
 
+  /** 선택지 클릭 — 확인 전이면 자유롭게 바꿀 수 있음 */
   const handleSelect = (choiceId: number) => {
-    if (selected !== null) return;
+    if (answered) return;
     setSelected(choiceId);
-    const q = questions[index];
-    const correct = choiceId === q.correctId;
-    recordAnswer({ wordId: q.word.id, correct });
-    if (!correct) setIncorrect((prev) => [...prev, q.word.id]);
   };
 
+  /** 확인 버튼 — 이때 채점 */
+  const handleConfirm = () => {
+    if (selected === null || answered) return;
+    const q = questions[index];
+    const correct = selected === q.correctId;
+    recordAnswer({ wordId: q.word.id, correct });
+    if (!correct) setIncorrect((prev) => [...prev, q.word.id]);
+    setAnswered(true);
+  };
+
+  /** 다음 문제 */
   const handleNext = () => {
     setSelected(null);
+    setAnswered(false);
     if (index + 1 >= questions.length) {
       setPhase('result');
       return;
@@ -97,13 +110,7 @@ export const QuizRunner = ({ questionCount = 10, essentialOnly, filterIds }: Pro
   }
 
   if (phase === 'result') {
-    return (
-      <QuizResultView
-        onRestart={() => {
-          setPhase('idle');
-        }}
-      />
-    );
+    return <QuizResultView onRestart={() => setPhase('idle')} />;
   }
 
   const current = questions[index];
@@ -121,10 +128,16 @@ export const QuizRunner = ({ questionCount = 10, essentialOnly, filterIds }: Pro
   return (
     <Stack gap={4}>
       <ProgressBar />
-      <QuizQuestionView question={current} selectedId={selected} disabled={selected !== null} onSelect={handleSelect} />
-      <Button size="lg" onClick={handleNext} disabled={selected === null} fullWidth>
-        {index + 1 >= questions.length ? '결과 보기' : '다음 문제'}
-      </Button>
+      <QuizQuestionView question={current} selectedId={selected} answered={answered} onSelect={handleSelect} />
+      {!answered ? (
+        <Button size="lg" onClick={handleConfirm} disabled={selected === null} fullWidth>
+          확인하기
+        </Button>
+      ) : (
+        <Button size="lg" onClick={handleNext} fullWidth>
+          {index + 1 >= questions.length ? '결과 보기' : '다음 문제'}
+        </Button>
+      )}
     </Stack>
   );
 };

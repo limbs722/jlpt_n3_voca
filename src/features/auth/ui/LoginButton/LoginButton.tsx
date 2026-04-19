@@ -1,6 +1,6 @@
 'use client';
 
-import { useAuth, useSignInWithGoogle, useSignOut } from '@/entities/auth';
+import { useAuth, useSignInWithGoogle, useSignOut } from '@/entities/auth/api';
 
 import { AvatarButton, AvatarImg, AvatarInitial, Placeholder, SignInButton } from './LoginButton.style';
 

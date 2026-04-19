@@ -2,9 +2,9 @@
 
 import { useAtomValue } from 'jotai';
 
-import { useFavorites } from '@/entities/favorite';
-import { statsAtom } from '@/entities/user-progress';
-import { useWordsQuery } from '@/entities/word';
+import { useFavorites } from '@/entities/favorite/api';
+import { statsAtom } from '@/entities/user-progress/model';
+import { useWordsQuery } from '@/entities/word/api';
 
 import { Cell, Grid, Label, Value } from './StatsDashboard.style';
 

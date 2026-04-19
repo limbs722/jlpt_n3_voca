@@ -1,6 +1,6 @@
 'use client';
 
-import { LoginButton } from '@/features/auth';
+import { LoginButton } from '@/features/auth/ui';
 import { APP_NAME } from '@/shared/config/constants';
 
 import { BackLink, Bar, Brand, Left, Right, Title } from './Header.style';

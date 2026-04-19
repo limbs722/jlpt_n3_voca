@@ -2,7 +2,7 @@
 
 import { useAtom } from 'jotai';
 
-import { searchQueryAtom } from '@/entities/word';
+import { searchQueryAtom } from '@/entities/word/model';
 
 import { Clear, Icon, Input, Wrap } from './SearchBar.style';
 

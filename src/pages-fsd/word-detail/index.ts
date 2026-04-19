@@ -1,1 +1,0 @@
-export { WordDetailPage } from './ui';

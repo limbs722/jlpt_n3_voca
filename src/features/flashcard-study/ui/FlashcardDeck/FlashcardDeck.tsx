@@ -4,8 +4,8 @@ import { useEffect, useMemo } from 'react';
 
 import { useAtom } from 'jotai';
 
-import { useRecordAnswer } from '@/entities/user-progress';
-import { useWordsQuery, type Word } from '@/entities/word';
+import { useRecordAnswer } from '@/entities/user-progress/api';
+import { useWordsQuery } from '@/entities/word/api';
 import { shuffle } from '@/shared/lib/utils/shuffle';
 import { Button } from '@/shared/ui/Button';
 import { Stack } from '@/shared/ui/Container';
@@ -14,6 +14,8 @@ import { flashcardDeckSizeAtom, flashcardFlippedAtom, flashcardIndexAtom } from 
 import { Flashcard } from '../Flashcard/Flashcard';
 
 import { Controls, DoneDesc, DoneTitle, DoneWrap, Info, Progress } from './FlashcardDeck.style';
+
+import type { Word } from '@/entities/word/model';
 
 interface Props {
   filterIds?: number[];

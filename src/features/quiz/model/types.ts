@@ -1,4 +1,4 @@
-import type { Word } from '@/entities/word';
+import type { Word } from '@/entities/word/model';
 
 export interface QuizChoice {
   wordId: number;

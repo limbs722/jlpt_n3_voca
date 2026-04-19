@@ -4,14 +4,15 @@ import { useMemo } from 'react';
 
 import Link from 'next/link';
 
-import { useFavorites } from '@/entities/favorite';
-import { useWordsQuery } from '@/entities/word';
+import { useFavorites } from '@/entities/favorite/api';
+import { useWordsQuery } from '@/entities/word/api';
+import { LoginBanner } from '@/features/auth/ui';
 import { ROUTES } from '@/shared/config/constants';
 import { Button } from '@/shared/ui/Button';
 import { Container, Row, Stack } from '@/shared/ui/Container';
-import { BottomNav } from '@/widgets/bottom-nav';
-import { Header } from '@/widgets/header';
-import { WordList } from '@/widgets/word-list';
+import { BottomNav } from '@/widgets/bottom-nav/ui';
+import { Header } from '@/widgets/header/ui';
+import { WordList } from '@/widgets/word-list/ui';
 
 import { Count, CountLabel, Main, Summary } from './FavoritesPage.style';
 
@@ -27,6 +28,8 @@ export const FavoritesPage = () => {
       <Container>
         <Main>
           <Stack gap={4}>
+            <LoginBanner message="즐겨찾기가 모든 기기에서 동기화돼요." />
+
             <Summary>
               <Count>{favoriteWords.length}</Count>
               <CountLabel>개의 단어</CountLabel>

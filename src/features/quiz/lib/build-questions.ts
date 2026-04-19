@@ -1,7 +1,7 @@
 import { pickRandom, shuffle } from '@/shared/lib/utils/shuffle';
 
 import type { QuizQuestion } from '../model/types';
-import type { Word } from '@/entities/word';
+import type { Word } from '@/entities/word/model';
 
 export const buildQuizQuestions = (words: Word[], count = 10): QuizQuestion[] => {
   if (words.length < 4) return [];

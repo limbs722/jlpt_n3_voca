@@ -49,6 +49,13 @@ export const Choices = styled.div`
 
 export const stateStyles = (state: ChoiceState, theme: AppTheme) => {
   switch (state) {
+    case 'selected':
+      return `
+        border-color: ${theme.colors.accent};
+        background: ${theme.colors.accent}12;
+        color: ${theme.colors.accent};
+        font-weight: 600;
+      `;
     case 'correct':
       return `
         border-color: ${theme.colors.success};

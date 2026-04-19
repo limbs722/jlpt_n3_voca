@@ -3,7 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtom, useAtomValue } from 'jotai';
 
-import { userAtom } from '@/entities/auth';
+import { userAtom } from '@/entities/auth/model/atoms';
 import { getSupabaseBrowserClient } from '@/shared/lib/supabase/client';
 import { getAnonymousUserId } from '@/shared/lib/utils/anonymous-user';
 

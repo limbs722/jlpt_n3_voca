@@ -6,15 +6,10 @@ import Link from 'next/link';
 
 import { useAtomValue } from 'jotai';
 
-import {
-  WordCard,
-  searchQueryAtom,
-  selectedCategoryAtom,
-  showEssentialOnlyAtom,
-  useWordsQuery,
-  type Word,
-} from '@/entities/word';
-import { FavoriteButton } from '@/features/favorite-toggle';
+import { useWordsQuery } from '@/entities/word/api';
+import { searchQueryAtom, selectedCategoryAtom, showEssentialOnlyAtom, type Word } from '@/entities/word/model';
+import { WordCard } from '@/entities/word/ui';
+import { FavoriteButton } from '@/features/favorite-toggle/ui';
 import { ROUTES } from '@/shared/config/constants';
 
 import { Info, List } from './WordList.style';

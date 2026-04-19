@@ -1,10 +1,10 @@
 'use client';
 
-import { CategoryFilter, SearchBar } from '@/features/word-search';
+import { CategoryFilter, SearchBar } from '@/features/word-search/ui';
 import { Container, Stack } from '@/shared/ui/Container';
-import { BottomNav } from '@/widgets/bottom-nav';
-import { Header } from '@/widgets/header';
-import { WordList } from '@/widgets/word-list';
+import { BottomNav } from '@/widgets/bottom-nav/ui';
+import { Header } from '@/widgets/header/ui';
+import { WordList } from '@/widgets/word-list/ui';
 
 import { Main } from './WordsPage.style';
 

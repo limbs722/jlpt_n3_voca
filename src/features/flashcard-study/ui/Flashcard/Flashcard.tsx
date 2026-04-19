@@ -1,6 +1,6 @@
 'use client';
 
-import { POS_LABEL_KO, type Word } from '@/entities/word';
+import { POS_LABEL_KO, type Word } from '@/entities/word/model';
 import { Badge } from '@/shared/ui/Badge';
 
 import {

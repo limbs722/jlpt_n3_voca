@@ -7,9 +7,10 @@ import { QueryClientProvider, HydrationBoundary, type DehydratedState } from '@t
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Provider as JotaiProvider, useSetAtom, useAtomValue } from 'jotai';
 
-import { authLoadingAtom, userAtom } from '@/entities/auth';
-import { localFavoritesAtom } from '@/entities/favorite';
-import { progressAtom, migrateLocalProgressToSupabase, useProgressSync } from '@/entities/user-progress';
+import { authLoadingAtom, userAtom } from '@/entities/auth/model';
+import { localFavoritesAtom } from '@/entities/favorite/model';
+import { migrateLocalProgressToSupabase, useProgressSync } from '@/entities/user-progress/api';
+import { progressAtom } from '@/entities/user-progress/model';
 import { EmotionRegistry } from '@/shared/lib/emotion/registry';
 import { createQueryClient } from '@/shared/lib/query/query-client';
 import { getSupabaseBrowserClient } from '@/shared/lib/supabase/client';

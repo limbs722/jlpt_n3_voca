@@ -19,17 +19,17 @@ import type { QuizQuestion } from '../../model/types';
 interface Props {
   question: QuizQuestion;
   selectedId: number | null;
-  disabled: boolean;
+  /** true = 확인 버튼을 눌러 채점이 완료된 상태 */
+  answered: boolean;
   onSelect: (choiceId: number) => void;
 }
 
-export const QuizQuestionView = ({ question, selectedId, disabled, onSelect }: Props) => {
+export const QuizQuestionView = ({ question, selectedId, answered, onSelect }: Props) => {
   const prompt =
     question.direction === 'jp-to-ko' ? (question.word.kanji ?? question.word.reading) : question.word.meaning_ko;
 
   const subPrompt = question.direction === 'jp-to-ko' && question.word.kanji ? question.word.reading : null;
 
-  const isAnswered = selectedId !== null;
   const isCorrect = selectedId === question.correctId;
   const correctAnswer = question.choices.find((c) => c.wordId === question.correctId)?.text ?? '';
 
@@ -49,7 +49,11 @@ export const QuizQuestionView = ({ question, selectedId, disabled, onSelect }: P
           const isChoiceCorrect = c.wordId === question.correctId;
 
           let state: ChoiceState = 'idle';
-          if (isAnswered) {
+          if (!answered) {
+            // 확인 전: 선택한 항목만 파란색 하이라이트
+            if (isSelected) state = 'selected';
+          } else {
+            // 확인 후: 정답/오답 색상 표시
             if (isChoiceCorrect) state = 'correct';
             else if (isSelected) state = 'wrong';
           }
@@ -57,22 +61,22 @@ export const QuizQuestionView = ({ question, selectedId, disabled, onSelect }: P
           return (
             <ChoiceButton
               key={c.wordId}
-              onClick={() => !disabled && onSelect(c.wordId)}
-              disabled={disabled}
+              onClick={() => !answered && onSelect(c.wordId)}
+              disabled={answered}
               $state={state}
               $jp={question.direction === 'ko-to-jp'}
               type="button"
             >
               <ChoiceText>{c.text}</ChoiceText>
-              {isAnswered && isChoiceCorrect && <ChoiceIcon>✓</ChoiceIcon>}
-              {isAnswered && isSelected && !isChoiceCorrect && <ChoiceIcon>✗</ChoiceIcon>}
+              {answered && isChoiceCorrect && <ChoiceIcon>✓</ChoiceIcon>}
+              {answered && isSelected && !isChoiceCorrect && <ChoiceIcon>✗</ChoiceIcon>}
             </ChoiceButton>
           );
         })}
       </Choices>
 
-      {/* 정답/오답 피드백 배너 */}
-      {isAnswered && (
+      {/* 확인 후에만 피드백 배너 표시 */}
+      {answered && (
         <FeedbackBanner $correct={isCorrect}>
           {isCorrect ? '✓  정답이에요!' : `✗  오답 — 정답: ${correctAnswer}`}
         </FeedbackBanner>

@@ -3,9 +3,9 @@
 import { APP_DESCRIPTION, ROUTES } from '@/shared/config/constants';
 import { Card, CardSubtitle, CardTitle } from '@/shared/ui/Card';
 import { Container, Stack } from '@/shared/ui/Container';
-import { BottomNav } from '@/widgets/bottom-nav';
-import { Header } from '@/widgets/header';
-import { StatsDashboard } from '@/widgets/stats-dashboard';
+import { BottomNav } from '@/widgets/bottom-nav/ui';
+import { Header } from '@/widgets/header/ui';
+import { StatsDashboard } from '@/widgets/stats-dashboard/ui';
 
 import { Hero, HeroTitle, HeroDesc, Main, Shortcuts, ShortcutLink, ShortcutIcon } from './HomePage.style';
 

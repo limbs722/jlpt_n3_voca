@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef } from 'react';
 
 import { useAtom, useSetAtom } from 'jotai';
 
-import { userAtom } from '@/entities/auth';
+import { userAtom } from '@/entities/auth/model/atoms';
 import { getSupabaseBrowserClient } from '@/shared/lib/supabase/client';
 
 import { progressAtom, recordAnswerAtom } from '../model/atoms';

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import { WordDetailPage } from '@/pages-fsd/word-detail';
+import { WordDetailPage } from '@/pages-fsd/word-detail/ui';
 
 interface PageProps {
   params: { id: string };
